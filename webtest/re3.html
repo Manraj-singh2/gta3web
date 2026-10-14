@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>re3 - GTA III Web</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+        background-color: #1a1a1a;
+        color: #eee;
+      }
+      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+      div.emscripten { text-align: center; }
+      div.emscripten_border {
+        border: 2px solid #444;
+        display: inline-block;
+        background: #000;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      canvas.emscripten {
+        border: 0px none;
+        background-color: black;
+        width: 800px;
+        height: 600px;
+        display: block;
+      }
+      .spinner {
+        height: 30px;
+        width: 30px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: block;
+        animation: rotation 0.8s linear infinite;
+        border-left: 5px solid #444;
+        border-right: 5px solid #444;
+        border-bottom: 5px solid #444;
+        border-top: 5px solid #00a8ff;
+        border-radius: 100%;
+      }
+      @keyframes rotation {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      #status {
+        font-weight: bold;
+        color: #00a8ff;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+      #info-panel {
+        max-width: 800px;
+        margin: 10px auto;
+        padding: 10px 14px;
+        background: #252525;
+        border: 1px solid #333;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      #output {
+        width: 800px;
+        height: 220px;
+        margin: 10px auto;
+        display: block;
+        background-color: #0c0c0c;
+        color: #66e066;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 12px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 8px;
+        box-sizing: border-box;
+        outline: none;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 12px;
+      }
+      .badge-ok { background: #2e7d32; color: #fff; }
+      .badge-warn { background: #c62828; color: #fff; }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <h2 style="margin: 6px 0;">GTA III (re3 WebAssembly)</h2>
+      <div id="status">Initializing engine...</div>
+      <div class="spinner" id="spinner"></div>
+      <progress value="0" max="100" id="progress" hidden="1"></progress>
+    </div>
+
+    <div style="text-align:center;margin:10px;">
+      <input type="file" id="gamedir" webkitdirectory>
+      <button id="startBtn">Start game</button>
+      <pre id="dbg" style="text-align:left;max-width:800px;margin:8px auto;padding:8px;background:#111;color:#ffd166;font-size:12px;white-space:pre-wrap;"></pre>
+    </div>
+
+    <div style="text-align: center; margin-top: 10px;">
+      <div class="emscripten_border">
+        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+      </div>
+    </div>
+
+    <div id="info-panel">
+      <strong>Environment:</strong> 
+      crossOriginIsolated = <span id="coi-status" class="badge">checking...</span> | 
+      Threads (SharedArrayBuffer) = <span id="sab-status" class="badge">checking...</span>
+      <br>
+      <small style="color: #aaa;">Select the "Grand Theft Auto 3" game directory to load assets into the virtual filesystem and launch the engine.</small>
+    </div>
+
+    <textarea id="output" rows="12" readonly></textarea>
+
+    <script type="text/javascript">
+      // Check crossOriginIsolated and SharedArrayBuffer
+      const coiStatusEl = document.getElementById('coi-status');
+      const sabStatusEl = document.getElementById('sab-status');
+      if (window.crossOriginIsolated) {
+        coiStatusEl.textContent = 'true';
+        coiStatusEl.className = 'badge badge-ok';
+      } else {
+        coiStatusEl.textContent = 'false (Missing COOP/COEP headers)';
+        coiStatusEl.className = 'badge badge-warn';
+      }
+
+      if (typeof SharedArrayBuffer !== 'undefined') {
+        sabStatusEl.textContent = 'Available';
+        sabStatusEl.className = 'badge badge-ok';
+      } else {
+        sabStatusEl.textContent = 'Unavailable';
+        sabStatusEl.className = 'badge badge-warn';
+      }
+
+      var statusElement = document.getElementById('status');
+      var progressElement = document.getElementById('progress');
+      var spinnerElement = document.getElementById('spinner');
+      var canvasElement = document.getElementById('canvas');
+      var outputElement = document.getElementById('output');
+
+      canvasElement.addEventListener('webglcontextlost', (e) => {
+        alert('WebGL context lost. Please reload the page.');
+        e.preventDefault();
+      }, false);
+
+      var setStatus = (text) => {
+        if (!setStatus.last) setStatus.last = { time: Date.now(), text: '' };
+        if (text === setStatus.last.text) return;
+        var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+        var now = Date.now();
+        if (m && now - setStatus.last.time < 30) return;
+        setStatus.last.time = now;
+        setStatus.last.text = text;
+        if (m) {
+          text = m[1];
+          progressElement.value = parseInt(m[2]) * 100;
+          progressElement.max = parseInt(m[4]) * 100;
+          progressElement.hidden = false;
+          spinnerElement.hidden = false;
+        } else {
+          progressElement.value = null;
+          progressElement.max = null;
+          progressElement.hidden = true;
+          if (!text) spinnerElement.style.display = 'none';
+        }
+        statusElement.innerHTML = text;
+      };
+
+      var Module = {
+        noInitialRun: true,
+        preRun: [],
+        postRun: [function() {
+          console.log("re3 postRun completed.");
+        }],
+        print: function(...args) {
+          var text = args.join(' ');
+          console.log(text);
+          if (outputElement) {
+            outputElement.value += text + "\n";
+            outputElement.scrollTop = outputElement.scrollHeight;
+          }
+        },
+        printErr: function(...args) {
+          var text = args.join(' ');
+          console.error(text);
+          if (outputElement) {
+            outputElement.value += "[ERR] " + text + "\n";
+            outputElement.scrollTop = outputElement.scrollHeight;
+          }
+        },
+        canvas: canvasElement,
+        setStatus: setStatus,
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+      };
+
+      setStatus('Ready. Please choose game directory.');
+      window.onerror = (event) => {
+        setStatus('Exception thrown, check console log');
+        spinnerElement.style.display = 'none';
+      };
+
+    </script>
+
+    <script>
+      const dbg = document.getElementById('dbg');
+      function log(msg) {
+        console.log('[loader]', msg);
+        dbg.textContent += msg + '\n';
+      }
+
+      // Make sure auto-start is off and track runtime readiness
+      Module.noInitialRun = true;
+      let runtimeReady = false;
+      const prevInit = Module.onRuntimeInitialized;
+      Module.onRuntimeInitialized = function () {
+        runtimeReady = true;
+        log('Runtime initialized.');
+        if (prevInit) prevInit();
+      };
+
+      // Surface errors that would otherwise be silent
+      window.addEventListener('error', e => log('JS ERROR: ' + e.message));
+      window.addEventListener('unhandledrejection', e => log('PROMISE ERROR: ' + (e.reason && e.reason.stack || e.reason)));
+
+      let pickedFiles = [];
+      document.getElementById('gamedir').addEventListener('change', e => {
+        pickedFiles = Array.from(e.target.files);
+        log('Selected ' + pickedFiles.length + ' files.');
+        if (pickedFiles.length) log('First file path: ' + pickedFiles[0].webkitRelativePath);
+      });
+
+      const SKIP = /^(movies|mp3|userfiles)/i; // skip big files for the first test
+
+      document.getElementById('startBtn').addEventListener('click', async () => {
+        try {
+          log('--- Start clicked ---');
+          log('crossOriginIsolated: ' + window.crossOriginIsolated);
+          log('Runtime ready: ' + runtimeReady);
+          log('Module.FS: ' + typeof Module.FS);
+          log('Module.callMain: ' + typeof Module.callMain);
+
+          if (!pickedFiles.length) { log('STOP: no folder selected. Pick your GTA III folder first.'); return; }
+          if (typeof Module.FS === 'undefined') { log('STOP: Module.FS is undefined. The new re3.js is not being served (it was built without EXPORTED_RUNTIME_METHODS=FS).'); return; }
+          if (typeof Module.callMain === 'undefined') { log('STOP: Module.callMain is undefined. Same cause as above.'); return; }
+          if (!runtimeReady) { log('STOP: runtime is not initialized yet. Wait a moment and click again, or check the console for a wasm load error.'); return; }
+
+          const FS = Module.FS;
+          FS.mkdirTree('/gta3');
+          let n = 0, skipped = 0, failed = 0;
+          for (const f of pickedFiles) {
+            const rel = f.webkitRelativePath.split('/').slice(1).join('/');
+            if (!rel || SKIP.test(rel)) { skipped++; continue; }
+            try {
+              const dir = rel.includes('/') ? rel.slice(0, rel.lastIndexOf('/')) : '';
+              if (dir) FS.mkdirTree('/gta3/' + dir);
+              FS.writeFile('/gta3/' + rel, new Uint8Array(await f.arrayBuffer()));
+              n++;
+              if (n % 25 === 0) log('Loaded ' + n + ' files... (' + rel + ')');
+            } catch (err) {
+              failed++;
+              log('FAILED to load ' + rel + ': ' + err);
+            }
+          }
+          log('Loaded ' + n + ' files, skipped ' + skipped + ', failed ' + failed + '.');
+
+          log('Top level of /gta3: ' + FS.readdir('/gta3').join(', '));
+          FS.chdir('/gta3');
+          log('Calling main()...');
+          Module.callMain([]);
+          log('callMain returned (the game loop may still be running).');
+        } catch (err) {
+          log('EXCEPTION in start handler: ' + (err && err.stack || err));
+        }
+      });
+
+      log('Loader ready. Choose your GTA III folder, then click Start.');
+    </script>
+    <script async type="text/javascript" src="re3.js"></script>
+  </body>
+</html>
