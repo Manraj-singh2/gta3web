@@ -24,6 +24,10 @@ long _dwOperatingSystemVersion;
 #include <stddef.h>
 #endif
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #include "common.h"
 #if (defined(_MSC_VER))
 #include <tchar.h>
@@ -746,15 +750,22 @@ psSelectDevice()
 #else
 	if ( !useDefault )
 	{
+#if defined(__EMSCRIPTEN__)
+		FrontEndMenuManager.m_nPrefsWindowed = 1;
+#endif
 		if(FrontEndMenuManager.m_nPrefsWidth == 0 ||
 		   FrontEndMenuManager.m_nPrefsHeight == 0 ||
 		   FrontEndMenuManager.m_nPrefsDepth == 0){
 			// Defaults if nothing specified
 			const GLFWvidmode *mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-			FrontEndMenuManager.m_nPrefsWidth = mode->width;
-			FrontEndMenuManager.m_nPrefsHeight = mode->height;
+			FrontEndMenuManager.m_nPrefsWidth = mode ? mode->width : 800;
+			FrontEndMenuManager.m_nPrefsHeight = mode ? mode->height : 600;
 			FrontEndMenuManager.m_nPrefsDepth = 32;
+#if defined(__EMSCRIPTEN__)
+			FrontEndMenuManager.m_nPrefsWindowed = 1;
+#else
 			FrontEndMenuManager.m_nPrefsWindowed = 0;
+#endif
 		}
 
 		// Find the videomode that best fits what we got from the settings file
@@ -781,8 +792,12 @@ psSelectDevice()
 		}
 
 		if(bestFsMode < 0){
-			printf("WARNING: Cannot find desired video mode, selecting device cancelled\n");
-			return FALSE;
+			if (bestWndMode >= 0) {
+				bestFsMode = bestWndMode;
+			} else {
+				printf("WARNING: Cannot find desired video mode, selecting device cancelled\n");
+				return FALSE;
+			}
 		}
 		GcurSelVM = bestFsMode;
 
@@ -944,7 +959,11 @@ void _InputInitialiseJoys()
 
 long _InputInitialiseMouse()
 {
+#ifndef __EMSCRIPTEN__
 	glfwSetInputMode(PSGLOBAL(window), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+#else
+	glfwSetInputMode(PSGLOBAL(window), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+#endif
 	return 0;
 }
 
@@ -1758,9 +1777,178 @@ windowIconifyCB(GLFWwindow* window, int iconified) {
 	WindowIconified = !!iconified;
 }
 
-/*
- *****************************************************************************
- */
+#ifdef __EMSCRIPTEN__
+static void re3_main_loop(void)
+{
+	if (RsGlobal.quit || glfwWindowShouldClose(PSGLOBAL(window))) {
+		emscripten_cancel_main_loop();
+		RwInitialised = FALSE;
+		FrontEndMenuManager.UnloadTextures();
+		if (gGameState == GS_PLAYING_GAME)
+			CGame::ShutDown();
+		DMAudio.Terminate();
+		_psFreeVideoModeList();
+		RsEventHandler(rsRWTERMINATE, nil);
+		RsEventHandler(rsTERMINATE, nil);
+		return;
+	}
+
+	if (FrontEndMenuManager.m_bWantToRestart || FrontEndMenuManager.m_bWantToLoad) {
+		RwInitialised = FALSE;
+		FrontEndMenuManager.UnloadTextures();
+		CPad::ResetCheats();
+		CPad::StopPadsShaking();
+		DMAudio.ChangeMusicMode(MUSICMODE_DISABLE);
+		CTimer::Stop();
+
+		if (FrontEndMenuManager.m_bWantToLoad) {
+			CGame::ShutDownForRestart();
+			CGame::InitialiseWhenRestarting();
+			DMAudio.ChangeMusicMode(MUSICMODE_GAME);
+			LoadSplash(GetLevelSplashScreen(CGame::currLevel));
+			FrontEndMenuManager.m_bWantToLoad = false;
+		} else {
+#ifndef MASTER
+			if (gbModelViewer)
+				CAnimViewer::Shutdown();
+			else
+#endif
+			if (gGameState == GS_PLAYING_GAME)
+				CGame::ShutDown();
+
+			CTimer::Stop();
+
+			if (FrontEndMenuManager.m_bFirstTime == true) {
+				gGameState = GS_INIT_FRONTEND;
+				TRACE("gGameState = GS_INIT_FRONTEND;");
+			} else {
+				gGameState = GS_INIT_PLAYING_GAME;
+				TRACE("gGameState = GS_INIT_PLAYING_GAME;");
+			}
+		}
+
+		FrontEndMenuManager.m_bFirstTime = false;
+		FrontEndMenuManager.m_bWantToRestart = false;
+		RwInitialised = TRUE;
+		return;
+	}
+
+	glfwPollEvents();
+
+	if (ForegroundApp) {
+		switch (gGameState) {
+			case GS_START_UP:
+			{
+#ifdef NO_MOVIES
+				gGameState = GS_INIT_ONCE;
+#else
+				gGameState = GS_INIT_LOGO_MPEG;
+#endif
+				TRACE("gGameState = GS_INIT_ONCE");
+				break;
+			}
+
+			case GS_INIT_LOGO_MPEG:
+			{
+				gGameState = GS_LOGO_MPEG;
+				TRACE("gGameState = GS_LOGO_MPEG;");
+				break;
+			}
+
+			case GS_LOGO_MPEG:
+			{
+				++gGameState;
+				break;
+			}
+
+			case GS_INIT_INTRO_MPEG:
+			{
+				gGameState = GS_INTRO_MPEG;
+				TRACE("gGameState = GS_INTRO_MPEG;");
+				break;
+			}
+
+			case GS_INTRO_MPEG:
+			{
+				++gGameState;
+				break;
+			}
+
+			case GS_INIT_ONCE:
+			{
+				LoadingScreen(nil, nil, "loadsc0");
+				if (!CGame::InitialiseOnceAfterRW())
+					RsGlobal.quit = TRUE;
+				gGameState = GS_INIT_FRONTEND;
+				TRACE("gGameState = GS_INIT_FRONTEND;");
+				break;
+			}
+
+			case GS_INIT_FRONTEND:
+			{
+				LoadingScreen(nil, nil, "loadsc0");
+				FrontEndMenuManager.m_bGameNotLoaded = true;
+				CMenuManager::m_bStartUpFrontEndRequested = true;
+
+				if (defaultFullscreenRes) {
+					defaultFullscreenRes = FALSE;
+					FrontEndMenuManager.m_nPrefsVideoMode = GcurSelVM;
+					FrontEndMenuManager.m_nDisplayVideoMode = GcurSelVM;
+				}
+
+				gGameState = GS_FRONTEND;
+				TRACE("gGameState = GS_FRONTEND;");
+				break;
+			}
+
+			case GS_FRONTEND:
+			{
+				if (!WindowIconified)
+					RsEventHandler(rsFRONTENDIDLE, nil);
+
+				if (!FrontEndMenuManager.m_bMenuActive || FrontEndMenuManager.m_bWantToLoad) {
+					gGameState = GS_INIT_PLAYING_GAME;
+					TRACE("gGameState = GS_INIT_PLAYING_GAME;");
+				}
+
+				if (FrontEndMenuManager.m_bWantToLoad) {
+					InitialiseGame();
+					FrontEndMenuManager.m_bGameNotLoaded = false;
+					gGameState = GS_PLAYING_GAME;
+					TRACE("gGameState = GS_PLAYING_GAME;");
+				}
+				break;
+			}
+
+			case GS_INIT_PLAYING_GAME:
+			{
+				InitialiseGame();
+				FrontEndMenuManager.m_bGameNotLoaded = false;
+				gGameState = GS_PLAYING_GAME;
+				TRACE("gGameState = GS_PLAYING_GAME;");
+				break;
+			}
+
+			case GS_PLAYING_GAME:
+			{
+				float ms = (float)CTimer::GetCurrentTimeInCycles() / (float)CTimer::GetCyclesPerMillisecond();
+				if (RwInitialised) {
+					if (!CMenuManager::m_PrefsFrameLimiter || (1000.0f / (float)RsGlobal.maxFPS) < ms)
+						RsEventHandler(rsIDLE, (void *)TRUE);
+				}
+				break;
+			}
+		}
+	} else {
+		if (RwCameraBeginUpdate(Scene.camera)) {
+			RwCameraEndUpdate(Scene.camera);
+			ForegroundApp = TRUE;
+			RsEventHandler(rsACTIVATE, (void *)TRUE);
+		}
+	}
+}
+#endif
+
 #ifdef _WIN32
 int PASCAL
 WinMain(HINSTANCE instance,
@@ -1968,6 +2156,15 @@ main(int argc, char *argv[])
 	
 	initkeymap();
 
+#ifdef __EMSCRIPTEN__
+	RwInitialised = TRUE;
+	pos.x = RsGlobal.maximumWidth * 0.5f;
+	pos.y = RsGlobal.maximumHeight * 0.5f;
+	RsMouseSetPos(&pos);
+
+	emscripten_set_main_loop(re3_main_loop, 0, 1);
+	return 0;
+#else
 	while ( TRUE )
 	{
 		RwInitialised = TRUE;
@@ -2319,6 +2516,7 @@ main(int argc, char *argv[])
 		FrontEndMenuManager.m_bWantToRestart = false;
 #endif
 	}
+#endif // !__EMSCRIPTEN__
 	
 
 #ifndef MASTER

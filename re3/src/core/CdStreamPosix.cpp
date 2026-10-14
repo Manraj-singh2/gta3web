@@ -29,7 +29,7 @@
 bool flushStream[MAX_CDCHANNELS];
 #endif
 
-#ifdef USE_UNNAMED_SEM
+#if defined(USE_UNNAMED_SEM) || defined(__EMSCRIPTEN__)
 
 #define RE3_SEM_OPEN(name, ...) re3_sem_open()
 sem_t*

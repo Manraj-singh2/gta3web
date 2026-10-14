@@ -106,6 +106,14 @@ const char *shaderDecl310es =
 "#define FRAGCOLOR(c) (fragColor = c)\n"
 "precision highp float;\n"
 "precision highp int;\n";
+const char *shaderDecl300es =
+"#version 300 es\n"
+"#define VSIN(index) layout(location = index) in\n"
+"#define VSOUT out\n"
+"#define FSIN in\n"
+"#define FRAGCOLOR(c) (fragColor = c)\n"
+"precision highp float;\n"
+"precision highp int;\n";
 
 const char *shaderDecl;
 
@@ -1689,10 +1697,15 @@ static struct {
 	int gl;
 	int major, minor;
 } profiles[] = {
+#ifdef __EMSCRIPTEN__
+	{ GLFW_OPENGL_ES_API, 3, 0 },
+	{ GLFW_OPENGL_ES_API, 2, 0 },
+#else
 	{ GLFW_OPENGL_API, 3, 3 },
 	{ GLFW_OPENGL_API, 2, 1 },
 	{ GLFW_OPENGL_ES_API, 3, 1 },
 	{ GLFW_OPENGL_ES_API, 2, 0 },
+#endif
 	{ 0, 0, 0 },
 };
 
@@ -1722,8 +1735,13 @@ startGLFW(void)
 		else
 			win = glfwCreateWindow(glGlobals.winWidth, glGlobals.winHeight, glGlobals.winTitle, nil, nil);
 		if(win){
+#ifdef __EMSCRIPTEN__
+			gl3Caps.gles = true;
+			gl3Caps.glversion = 30;
+#else
 			gl3Caps.gles = profiles[i].gl == GLFW_OPENGL_ES_API;
 			gl3Caps.glversion = profiles[i].major*10 + profiles[i].minor;
+#endif
 			break;
 		}
 	}
@@ -1783,9 +1801,16 @@ initOpenGL(void)
 
 	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &gl3Caps.maxAnisotropy);
 
+#ifdef __EMSCRIPTEN__
+	gl3Caps.gles = true;
+	gl3Caps.glversion = 30;
+	shaderDecl = shaderDecl300es;
+#else
 	if(gl3Caps.gles){
-		if(gl3Caps.glversion >= 30)
+		if(gl3Caps.glversion >= 31)
 			shaderDecl = shaderDecl310es;
+		else if(gl3Caps.glversion >= 30)
+			shaderDecl = shaderDecl300es;
 		else
 			shaderDecl = shaderDecl100es;
 	}else{
@@ -1794,6 +1819,7 @@ initOpenGL(void)
 		else
 			shaderDecl = shaderDecl120;
 	}
+#endif
 
 #ifndef RW_GL_USE_UBOS
 	u_alphaRef = registerUniform("u_alphaRef");

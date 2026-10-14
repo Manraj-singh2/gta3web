@@ -4410,3 +4410,453 @@ events:
         - "/"
       CMAKE_FIND_ROOT_PATH: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
 ...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Emscripten.cmake:6 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:6 (project)"
+    mode: "file"
+    variable: "_EMSCRIPTEN_PLATFORM_MODULE"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "Platform/Emscripten.cmake"
+    candidate_directories:
+      - "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/"
+    found: "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313\\Scripts"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\PuTTY\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\kubectl"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Emulator"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Shared"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\"
+        - "C:\\Users\\manra\\.local\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\Scripts\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\Users\\manra\\AppData\\Local\\Python\\bin"
+        - "D:\\Lead Manager\\flutter\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\manra\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-15.1.0-x86_64-pc-windows-msvc"
+        - "C:\\Users\\manra\\Downloads\\google-cloud-sdk\\bin"
+        - "C:\\kubectl"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\manra\\go\\bin"
+        - "D:\\Projects\\gta3\\emsdk"
+        - "D:\\Projects\\gta3\\emsdk\\upstream\\emscripten"
+        - "D:\\Projects\\gta3\\emsdk\\node\\24.19.0_64bit"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "c:\\Users\\manra\\.antigravity-ide\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+      CMAKE_INSTALL_PREFIX: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Emscripten.cmake:6 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:6 (project)"
+    mode: "file"
+    variable: "_EMSCRIPTEN_PLATFORM_MODULE"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "Platform/Emscripten.cmake"
+    candidate_directories:
+      - "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/"
+    found: "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/manra/.gemini/antigravity-ide/bin"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313\\Scripts"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\PuTTY\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\kubectl"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Emulator"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Shared"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\"
+        - "C:\\Users\\manra\\.local\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\Scripts\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\Users\\manra\\AppData\\Local\\Python\\bin"
+        - "D:\\Lead Manager\\flutter\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\manra\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-15.1.0-x86_64-pc-windows-msvc"
+        - "C:\\Users\\manra\\Downloads\\google-cloud-sdk\\bin"
+        - "C:\\kubectl"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\manra\\go\\bin"
+        - "D:\\Projects\\gta3\\emsdk"
+        - "D:\\Projects\\gta3\\emsdk\\upstream\\emscripten"
+        - "D:\\Projects\\gta3\\emsdk\\node\\24.19.0_64bit"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+      CMAKE_INSTALL_PREFIX: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Emscripten.cmake:6 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:6 (project)"
+    mode: "file"
+    variable: "_EMSCRIPTEN_PLATFORM_MODULE"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "Platform/Emscripten.cmake"
+    candidate_directories:
+      - "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/"
+    found: "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/manra/.gemini/antigravity-ide/bin"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313\\Scripts"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\PuTTY\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\kubectl"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Emulator"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Shared"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\"
+        - "C:\\Users\\manra\\.local\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\Scripts\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\Users\\manra\\AppData\\Local\\Python\\bin"
+        - "D:\\Lead Manager\\flutter\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\manra\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-15.1.0-x86_64-pc-windows-msvc"
+        - "C:\\Users\\manra\\Downloads\\google-cloud-sdk\\bin"
+        - "C:\\kubectl"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\manra\\go\\bin"
+        - "D:\\Projects\\gta3\\emsdk"
+        - "D:\\Projects\\gta3\\emsdk\\upstream\\emscripten"
+        - "D:\\Projects\\gta3\\emsdk\\node\\24.19.0_64bit"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+      CMAKE_INSTALL_PREFIX: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Emscripten.cmake:6 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:6 (project)"
+    mode: "file"
+    variable: "_EMSCRIPTEN_PLATFORM_MODULE"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "Platform/Emscripten.cmake"
+    candidate_directories:
+      - "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/"
+    found: "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/manra/.gemini/antigravity-ide/bin"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313\\Scripts"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\PuTTY\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\kubectl"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Emulator"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Shared"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\"
+        - "C:\\Users\\manra\\.local\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\Scripts\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\Users\\manra\\AppData\\Local\\Python\\bin"
+        - "D:\\Lead Manager\\flutter\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\manra\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-15.1.0-x86_64-pc-windows-msvc"
+        - "C:\\Users\\manra\\Downloads\\google-cloud-sdk\\bin"
+        - "C:\\kubectl"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\manra\\go\\bin"
+        - "D:\\Projects\\gta3\\emsdk"
+        - "D:\\Projects\\gta3\\emsdk\\upstream\\emscripten"
+        - "D:\\Projects\\gta3\\emsdk\\node\\24.19.0_64bit"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+      CMAKE_INSTALL_PREFIX: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Emscripten.cmake:6 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:6 (project)"
+    mode: "file"
+    variable: "_EMSCRIPTEN_PLATFORM_MODULE"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "Platform/Emscripten.cmake"
+    candidate_directories:
+      - "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/"
+    found: "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/manra/.gemini/antigravity-ide/bin"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313\\Scripts"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\PuTTY\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\kubectl"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Emulator"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Shared"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\"
+        - "C:\\Users\\manra\\.local\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\Scripts\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\Users\\manra\\AppData\\Local\\Python\\bin"
+        - "D:\\Lead Manager\\flutter\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\manra\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-15.1.0-x86_64-pc-windows-msvc"
+        - "C:\\Users\\manra\\Downloads\\google-cloud-sdk\\bin"
+        - "C:\\kubectl"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\manra\\go\\bin"
+        - "D:\\Projects\\gta3\\emsdk"
+        - "D:\\Projects\\gta3\\emsdk\\upstream\\emscripten"
+        - "D:\\Projects\\gta3\\emsdk\\node\\24.19.0_64bit"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+      CMAKE_INSTALL_PREFIX: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Emscripten.cmake:6 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:6 (project)"
+    mode: "file"
+    variable: "_EMSCRIPTEN_PLATFORM_MODULE"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "Platform/Emscripten.cmake"
+    candidate_directories:
+      - "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/"
+    found: "D:/Projects/gta3/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/manra/.gemini/antigravity-ide/bin"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python313\\Scripts"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\PuTTY\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\kubectl"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Emulator"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\Shared"
+        - "C:\\Program Files (x86)\\IBM\\Client Access\\"
+        - "C:\\Users\\manra\\.local\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\Scripts\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\Users\\manra\\AppData\\Local\\Python\\bin"
+        - "D:\\Lead Manager\\flutter\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\manra\\flutter\\bin"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-15.1.0-x86_64-pc-windows-msvc"
+        - "C:\\Users\\manra\\Downloads\\google-cloud-sdk\\bin"
+        - "C:\\kubectl"
+        - "C:\\Users\\manra\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\manra\\go\\bin"
+        - "D:\\Projects\\gta3\\emsdk"
+        - "D:\\Projects\\gta3\\emsdk\\upstream\\emscripten"
+        - "D:\\Projects\\gta3\\emsdk\\node\\24.19.0_64bit"
+        - "C:\\Users\\manra\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+      CMAKE_INSTALL_PREFIX: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "D:/Projects/gta3/emsdk/upstream/emscripten/cache/sysroot"
+...

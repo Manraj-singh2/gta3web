@@ -64,13 +64,15 @@ elseif(${PROJECT}_AUDIO STREQUAL "MSS")
 endif()
 
 if(EMSCRIPTEN)
-     # Emscripten's OpenAL has no EFX extension; use no-op stand-ins
+    # Emscripten's OpenAL has no EFX extension; use no-op stand-ins
     target_compile_definitions(${EXECUTABLE} PRIVATE AUDIO_OAL_NO_EFX)
     target_link_options(${EXECUTABLE} PRIVATE
         -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFULL_ES3=1
         -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=512MB -sMAXIMUM_MEMORY=2GB
         -sSTACK_SIZE=5MB -lopenal
-        -sPTHREAD_POOL_SIZE=4
+        -sPTHREAD_POOL_SIZE=8
+        -sEXIT_RUNTIME=0
+        -sFORCE_FILESYSTEM=1
         -sEXPORTED_RUNTIME_METHODS=FS,callMain
     )
 endif()
