@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/Projects/gta3/re3/build-web/cmake_install.cmake",
+		"D:/Projects/gta3/re3/build-web/vendor/librw/cmake_install.cmake",
+		"D:/Projects/gta3/re3/build-web/vendor/librw/src/cmake_install.cmake",
+		"D:/Projects/gta3/re3/build-web/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
